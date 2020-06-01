@@ -47,7 +47,7 @@ class DingDingPlugin(NotificationPlugin):
         """
 
         logging.warn('-------fengexian---------')
-        logging.warning(json.dumps(event).encode("utf-8"))
+        logging.warning(group)
         logging.warn('-------fengexian---------')
 
         if not self.is_configured(group.project):
