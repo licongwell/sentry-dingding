@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import json
+import logging
 
 import requests
 from sentry.plugins.bases.notify import NotificationPlugin
@@ -44,6 +45,8 @@ class DingDingPlugin(NotificationPlugin):
         """
         Process error.
         """
+        logging.warning(event)
+        
         if not self.is_configured(group.project):
             return
 
@@ -70,3 +73,7 @@ class DingDingPlugin(NotificationPlugin):
             headers={"Content-Type": "application/json"},
             data=json.dumps(data).encode("utf-8")
         )
+
+
+
+
