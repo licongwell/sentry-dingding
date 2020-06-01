@@ -45,9 +45,10 @@ class DingDingPlugin(NotificationPlugin):
         """
         Process error.
         """
-
         logging.warn('-------fengexian---------')
-        logging.warning(group)
+        logging.warning(event.issue_url)
+        logging.warning(event.datetime)
+        logging.warning(event.release)
         logging.warn('-------fengexian---------')
 
         if not self.is_configured(group.project):
