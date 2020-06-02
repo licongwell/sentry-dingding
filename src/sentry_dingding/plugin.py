@@ -46,7 +46,7 @@ class DingDingPlugin(NotificationPlugin):
         Process error.
         """
         logging.warn('-------fengexian---------')
-        logging.warning(json.dumps(event).encode("utf-8"))
+        logging.warning(type(event))
         logging.warn('-------fengexian---------')
 
         if not self.is_configured(group.project):
