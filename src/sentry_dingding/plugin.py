@@ -45,10 +45,6 @@ class DingDingPlugin(NotificationPlugin):
         """
         Process error.
         """
-        logging.warn('-------fengexian---------')
-        logging.warning(type(event))
-        logging.warn('-------fengexian---------')
-
         if not self.is_configured(group.project):
             return
 
@@ -56,6 +52,16 @@ class DingDingPlugin(NotificationPlugin):
             return
 
         access_token = self.get_option('access_token', group.project)
+        ignore_regular = self.get_option('ignore_regular', group.project)
+        highest_level_regular = self.get_option('highest_level_regular', group.project)
+        medium_level_regular = self.get_option('medium_level_regular', group.project)
+        low_level_regular = self.get_option('low_level_regular', group.project)
+        logging.warn('-----fengexin------')
+        logging.warn(ignore_regular)
+        logging.warn(highest_level_regular)
+        logging.warn(medium_level_regular)
+        logging.warn(low_level_regular)
+        logging.warn('-----fengexin------')
         send_url = DingTalk_API.format(token=access_token)
         title = u"New alert from {}".format(event.project.slug)
 
