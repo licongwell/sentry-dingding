@@ -10,7 +10,8 @@ class DingDingOptionsForm(forms.Form):
     )
     ignore_regular = forms.CharField(
         max_length=255,
-        help_text='Ignore regular expressions for this information'
+        help_text='Ignore regular expressions for this information',
+        required = False
     )
     highest_level_regular = forms.CharField(
         max_length=255,
@@ -19,9 +20,11 @@ class DingDingOptionsForm(forms.Form):
     )
     medium_level_regular = forms.CharField(
         max_length=255,
-        help_text='Regular expression of medium risk error information'
+        help_text='Regular expression of medium risk error information',
+        required = False
     )
     low_level_regular = forms.CharField(
         max_length=255,
-        help_text='Regular expression of low risk error information'
+        help_text='Regular expression of low risk error information',
+        required = False
     )
