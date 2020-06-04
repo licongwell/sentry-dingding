@@ -8,3 +8,7 @@ class DingDingOptionsForm(forms.Form):
         max_length=255,
         help_text='DingTalk robot access_token-test'
     )
+    abc_er = forms.CharField(
+        max_length=255,
+        help_text='DingTalk robot access_token-test'
+    )
