@@ -10,17 +10,17 @@ class DingDingOptionsForm(forms.Form):
     )
     ignore_regular = forms.CharField(
         max_length=255,
-        help_text='忽略错误信息正则表达式'
+        help_text='Ignore regular expressions for this information'
     )
-    highest_levelRegular = forms.CharField(
+    highest_level_regular = forms.CharField(
         max_length=255,
-        help_text='DingTalk robot access_token-test'
+        help_text='Regular expression of highest risk error information'
     )
-    medium_levelRegular = forms.CharField(
+    medium_level_regular = forms.CharField(
         max_length=255,
-        help_text='DingTalk robot access_token-test'
+        help_text='Regular expression of medium risk error information'
     )
-    low_levelRegular = forms.CharField(
+    low_level_regular = forms.CharField(
         max_length=255,
-        help_text='DingTalk robot access_token-test'
+        help_text='Regular expression of low risk error information'
     )
