@@ -68,11 +68,16 @@ class DingDingPlugin(NotificationPlugin):
             "msgtype": "markdown",
             "markdown": {
                 "title": "请注意！！",
-                "text": u"#### {title} \n > {message} [href]({url})".format(
+                "text": u"#### {title} @18126450689 \n > {message} [href]({url})".format(
                     title=title,
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
-                )
+                ),
+                "at": {
+                    "atMobiles": [
+                        "18126450689"
+                    ]
+                }
             }
         }
         requests.post(
