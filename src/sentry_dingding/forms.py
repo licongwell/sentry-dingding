@@ -8,7 +8,19 @@ class DingDingOptionsForm(forms.Form):
         max_length=255,
         help_text='DingTalk robot access_token-test'
     )
-    abc_er = forms.CharField(
+    ignore_regular = forms.CharField(
         max_length=255,
-        help_text='DingTalk robot access_token-test'
+        help_text='忽略错误信息的正则表达式'
+    )
+    highest_level_regular = forms.CharField(
+        max_length=255,
+        help_text='高危等级错误正则表达式'
+    )
+    medium_level_regular = forms.CharField(
+        max_length=255,
+        help_text='中危等级错误正则表达式'
+    )
+    low_level_regular = forms.CharField(
+        max_length=255,
+        help_text='低危等级错误正则表达式'
     )
