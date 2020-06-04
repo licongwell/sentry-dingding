@@ -14,7 +14,8 @@ class DingDingOptionsForm(forms.Form):
     )
     highest_level_regular = forms.CharField(
         max_length=255,
-        help_text='Regular expression of highest risk error information'
+        help_text='Regular expression of highest risk error information',
+        required = True
     )
     medium_level_regular = forms.CharField(
         max_length=255,
