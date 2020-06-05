@@ -67,22 +67,18 @@ class DingDingPlugin(NotificationPlugin):
         if (not resultDingStrObj):
             return
 
-
-        #title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
-
         data = {
             "msgtype": "markdown",
             "markdown": {
                 "title": resultDingStrObj["firstScreenTitle"],
-                "text": u"#### {title} \n @13543327129 \n > {message} [href]({url})".format(
+                "text": u"#### @13543327129 {title} \n > {message} \n [href]({url})".format(
                     title=resultDingStrObj["contentTitle"],
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
                 )
             },
             "at": {
-                "atMobiles":["13543327129"],
-                "isAtAll": True
+                "atMobiles":["13543327129"]
             }
         }
         requests.post(
@@ -113,20 +109,20 @@ class DingDingPlugin(NotificationPlugin):
         # 处理高危错误
         if isHighLevel:      
             resultDingStrObj["firstScreenTitle"] = u"【高危错误!!请及时处理】来自 {}".format(fix_project_name)
-            resultDingStrObj["contentTitle"] = u'<font color=#FF0000 size=5 face="黑体">【高危】错误信息</font> \n 项目名：{}'.format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u'<font color=#FF0000 size=5 face="黑体">【高危】错误信息预警</font> \n 项目名：{}'.format(fix_project_name)
             resultDingStrObj["isNeedAtAll"] = True
             return resultDingStrObj
 
         # 处理中危错误
         if isMediumLevel:
             resultDingStrObj["firstScreenTitle"] = u"【中危错误!】来自 {}".format(fix_project_name)
-            resultDingStrObj["contentTitle"] = u'<font color=#4B0082 size=4 face="黑体">【中危】错误信息</font> \n 项目名：{}'.format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u'<font color=#6A5ACD size=4 face="黑体">【中危】错误信息预警</font> \n 项目名：{}'.format(fix_project_name)
             return resultDingStrObj
 
         # 处理低级危错误
         if isLowLevel:
             resultDingStrObj["firstScreenTitle"] = u"【低危错误】来自 {}".format(fix_project_name)
-            resultDingStrObj["contentTitle"] = u'<font color=#7B68EE size=3 face="黑体">【低危】错误信息</font> \n 项目名：{}'.format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u'<font color=#7B68EE size=4 face="黑体">【低危】错误信息预警</font> \n 项目名：{}'.format(fix_project_name)
             return resultDingStrObj
 
         # 处理忽略错误
