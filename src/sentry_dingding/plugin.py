@@ -70,16 +70,25 @@ class DingDingPlugin(NotificationPlugin):
 
         #title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
 
+        # data = {
+        #     "msgtype": "markdown",
+        #     "markdown": {
+        #         "title": resultDingStrObj["firstScreenTitle"],
+        #         "text": u"#### {title} \n > {message} [href]({url})".format(
+        #             title=resultDingStrObj["contentTitle"],
+        #             message=event.message,
+        #             url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
+        #         )
+        #     },
+        #     "at": {
+        #         "isAtAll": True
+        #     }
+        # }
         data = {
-            "msgtype": "markdown",
-            "markdown": {
-                "title": resultDingStrObj["firstScreenTitle"],
-                "text": u"#### {title} \n > {message} [href]({url})".format(
-                    title=resultDingStrObj["contentTitle"],
-                    message=event.message,
-                    url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
-                )
-            },
+            "msgtype": "text", 
+            "text": {
+                "content": "我就是我, 是不一样的烟火"
+            }, 
             "at": {
                 "isAtAll": True
             }
