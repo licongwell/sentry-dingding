@@ -63,6 +63,10 @@ class DingDingPlugin(NotificationPlugin):
 
         resultDingStrObj = self.getDingTitles(group, event, *args, **kwargs)
 
+        # 忽略的消息不上送钉钉
+        if (not resultDingStrObj):
+            return
+
 
         #title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
 
@@ -76,7 +80,7 @@ class DingDingPlugin(NotificationPlugin):
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
                 ),
                 "at": {
-                    "isAtAll": resultDingStrObj["isNeedAtAll"]
+                    "isAtAll": True
                 }
             }
         }
