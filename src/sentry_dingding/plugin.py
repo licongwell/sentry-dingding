@@ -78,10 +78,10 @@ class DingDingPlugin(NotificationPlugin):
                     title=resultDingStrObj["contentTitle"],
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
-                ),
-                "at": {
-                    "isAtAll": True
-                }
+                )
+            },
+            "at": {
+                "isAtAll": resultDingStrObj["isNeedAtAll"]
             }
         }
         requests.post(
