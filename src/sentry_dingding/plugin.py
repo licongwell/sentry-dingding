@@ -71,14 +71,14 @@ class DingDingPlugin(NotificationPlugin):
             "msgtype": "markdown",
             "markdown": {
                 "title": resultDingStrObj["firstScreenTitle"],
-                "text": u"#### @13543327129 {title} \n > {message} \n [href]({url})".format(
+                "text": u"#### {title} \n > {message} [href]({url}) @18126450689".format(
                     title=resultDingStrObj["contentTitle"],
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
                 )
             },
             "at": {
-                "atMobiles":["13543327129"]
+                "atMobiles":["18126450689"]
             }
         }
         requests.post(

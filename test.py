@@ -6,12 +6,20 @@ low_level_regular = 'wade'
 fix_project_name = "自定义项目名字"
 isNeedAtAll = False
 
+cc = False
+if not cc :
+  print('12212')
+else:
+  print("dsadsa")  
+
 message = "这是我的kobe错误信息啊，james这个是怎么个意思呢"
 
 firstScreenTitle = "这是钉钉的展示缩略信息"
 contentTitle = "这是钉钉消息正式消息里面的title"
 
 resultDingStrObj = {}
+
+print(bool('dsa'))
 
 class FilterErrorLevel:
   def checkMessage (self):
@@ -46,10 +54,13 @@ class FilterErrorLevel:
 
 
   def regularInMessage (self, inputSrt):
-    strArr = inputSrt.split("||") 
-    for item in strArr:
-      if item in message:
-        return True
+    if (bool(inputSrt)):
+      strArr = inputSrt.split("||") 
+      for item in strArr:
+        if item in message:
+          return True
+    else:
+      return False       
 
 cc = FilterErrorLevel()
 aa = cc.checkMessage()
