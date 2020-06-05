@@ -81,7 +81,7 @@ class DingDingPlugin(NotificationPlugin):
                 )
             },
             "at": {
-                "isAtAll": resultDingStrObj["isNeedAtAll"]
+                "isAtAll": True
             }
         }
         requests.post(
