@@ -86,14 +86,17 @@ class DingDingPlugin(NotificationPlugin):
         )
     def getDingTitles(self, group, event, *args, **kwargs):
 
-        resultDingStrObj = {}
-
         ignore_regular = self.get_option('ignore_regular', group.project)
         highest_level_regular = self.get_option('highest_level_regular', group.project)
         medium_level_regular = self.get_option('medium_level_regular', group.project)
         low_level_regular = self.get_option('low_level_regular', group.project)
         fix_project_name = self.get_option('fix_project_name', group.project)
         fix_project_name = fix_project_name if bool(fix_project_name) else event.project.slug
+
+        resultDingStrObj = {}
+        resultDingStrObj["firstScreenTitle"] = "New error from"+ fix_project_name
+        resultDingStrObj["contentTitle"] = "New error from"+ fix_project_name
+        resultDingStrObj["isNeedAtAll"] = False
 
         # 错误信息分级判断
         isIgnoreMessage = self.regularInMessage(ignore_regular, event.message)
@@ -122,11 +125,8 @@ class DingDingPlugin(NotificationPlugin):
 
         # 处理忽略错误
         if isIgnoreMessage:
-            print("匹配到了需要忽略的信息了")
-            return False    
+            return False  
 
-        resultDingStrObj["firstScreenTitle"] = "New error from"+ fix_project_name
-        resultDingStrObj["contentTitle"] = "New error from"+ fix_project_name
         return resultDingStrObj
 
     def regularInMessage (self, inputSrt, message):
