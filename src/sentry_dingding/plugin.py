@@ -74,7 +74,7 @@ class DingDingPlugin(NotificationPlugin):
             "msgtype": "markdown",
             "markdown": {
                 "title": resultDingStrObj["firstScreenTitle"],
-                "text": u"#### {title} \n @13543327129 > {message} [href]({url})".format(
+                "text": u"#### {title} \n @13543327129 \n > {message} [href]({url})".format(
                     title=resultDingStrObj["contentTitle"],
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
@@ -120,13 +120,13 @@ class DingDingPlugin(NotificationPlugin):
         # 处理中危错误
         if isMediumLevel:
             resultDingStrObj["firstScreenTitle"] = u"【中危错误!】来自 {}".format(fix_project_name)
-            resultDingStrObj["contentTitle"] = u"**【中危】错误信息**来自 {}".format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u'<font color=#4B0082 size=4 face="黑体">【中危】错误信息</font> \n 项目名：{}'.format(fix_project_name)
             return resultDingStrObj
 
         # 处理低级危错误
         if isLowLevel:
             resultDingStrObj["firstScreenTitle"] = u"【低危错误】来自 {}".format(fix_project_name)
-            resultDingStrObj["contentTitle"] = u"【低危】错误信息来自 {}".format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u'<font color=#7B68EE size=3 face="黑体">【低危】错误信息</font> \n 项目名：{}'.format(fix_project_name)
             return resultDingStrObj
 
         # 处理忽略错误
