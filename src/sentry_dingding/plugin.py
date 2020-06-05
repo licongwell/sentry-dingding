@@ -85,10 +85,11 @@ class DingDingPlugin(NotificationPlugin):
         #     }
         # }
         data = {
-            "msgtype": "text", 
-            "text": {
-                "content": "我就是我, 是不一样的烟火"
-            }, 
+            "msgtype": "markdown",
+            "markdown": {
+                "title": 'dsads',
+                "text": '### markdowm 艾特全体测试 \n 打撒的撒'
+            },
             "at": {
                 "isAtAll": True
             }
