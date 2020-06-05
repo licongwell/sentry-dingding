@@ -74,13 +74,14 @@ class DingDingPlugin(NotificationPlugin):
             "msgtype": "markdown",
             "markdown": {
                 "title": resultDingStrObj["firstScreenTitle"],
-                "text": u"#### {title} \n > {message} [href]({url})".format(
+                "text": u"#### {title} \n @13543327129 > {message} [href]({url})".format(
                     title=resultDingStrObj["contentTitle"],
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
                 )
             },
             "at": {
+                "atMobiles":["13543327129"],
                 "isAtAll": True
             }
         }
@@ -112,7 +113,7 @@ class DingDingPlugin(NotificationPlugin):
         # 处理高危错误
         if isHighLevel:      
             resultDingStrObj["firstScreenTitle"] = u"【高危错误!!请及时处理】来自 {}".format(fix_project_name)
-            resultDingStrObj["contentTitle"] = u'<font color=#FF0000 size=6 face="黑体">【高危】错误信息来自 {}</font>'.format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u'<font color=#FF0000 size=5 face="黑体">【高危】错误信息</font> \n 项目名：{}'.format(fix_project_name)
             resultDingStrObj["isNeedAtAll"] = True
             return resultDingStrObj
 
