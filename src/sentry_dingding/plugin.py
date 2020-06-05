@@ -99,8 +99,8 @@ class DingDingPlugin(NotificationPlugin):
         fix_project_name = fix_project_name if bool(fix_project_name) else event.project.slug
 
         resultDingStrObj = {}
-        resultDingStrObj["firstScreenTitle"] = "New error from {}".format(fix_project_name)
-        resultDingStrObj["contentTitle"] = "New error from {}".format(fix_project_name)
+        resultDingStrObj["firstScreenTitle"] = u"New error from {}".format(fix_project_name)
+        resultDingStrObj["contentTitle"] = u"New error from {}".format(fix_project_name)
         resultDingStrObj["isNeedAtAll"] = False
 
         # 错误信息分级判断
