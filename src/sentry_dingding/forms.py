@@ -8,6 +8,11 @@ class DingDingOptionsForm(forms.Form):
         max_length=255,
         help_text='DingTalk robot access_token-test'
     )
+    fix_project_name = forms.CharField(
+        max_length=255,
+        help_text='fix your projectName on DingDing message',
+        required = False
+    )
     ignore_regular = forms.CharField(
         max_length=255,
         help_text='Ignore regular expressions for this information',

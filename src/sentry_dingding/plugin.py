@@ -57,10 +57,11 @@ class DingDingPlugin(NotificationPlugin):
         # highest_level_regular = self.get_option('highest_level_regular', group.project)
         # medium_level_regular = self.get_option('medium_level_regular', group.project)
         # low_level_regular = self.get_option('low_level_regular', group.project)
+        
 
         send_url = DingTalk_API.format(token=access_token)
 
-
+        self.getDingTitles(group, event, *args, **kwargs)
 
         title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
 
@@ -85,6 +86,19 @@ class DingDingPlugin(NotificationPlugin):
             headers={"Content-Type": "application/json"},
             data=json.dumps(data).encode("utf-8")
         )
+    def getDingTitles(self, group, event, *args, **kwargs):
+        ignore_regular = self.get_option('ignore_regular', group.project)
+        highest_level_regular = self.get_option('highest_level_regular', group.project)
+        medium_level_regular = self.get_option('medium_level_regular', group.project)
+        low_level_regular = self.get_option('low_level_regular', group.project)
+        logging.warn('------分割sss-----')
+        logging.warn(ignore_regular)
+        logging.warn(highest_level_regular)
+        logging.warn(medium_level_regular)   
+        logging.warn(low_level_regular)
+        logging.warn('------分割ssss-----')
+
+
 
 
 
