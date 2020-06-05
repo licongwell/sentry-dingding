@@ -61,23 +61,21 @@ class DingDingPlugin(NotificationPlugin):
 
         send_url = DingTalk_API.format(token=access_token)
 
-        self.getDingTitles(group, event, *args, **kwargs)
+        resultDingStrObj = self.getDingTitles(group, event, *args, **kwargs)
 
-        title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
+        #title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
 
         data = {
             "msgtype": "markdown",
             "markdown": {
-                "title": "请注意！！",
-                "text": u"#### {title} @18126450689 \n > {message} [href]({url})".format(
-                    title=title,
+                "title": resultDingStrObj["firstScreenTitle"],
+                "text": u"#### {title} \n > {message} [href]({url})".format(
+                    title=resultDingStrObj["contentTitle"],
                     message=event.message,
                     url=u"{}events/{}/".format(group.get_absolute_url(), event.id),
                 ),
                 "at": {
-                    "atMobiles": [
-                        "18126450689"
-                    ]
+                    "isAtAll": resultDingStrObj["isNeedAtAll"]
                 }
             }
         }
@@ -87,16 +85,58 @@ class DingDingPlugin(NotificationPlugin):
             data=json.dumps(data).encode("utf-8")
         )
     def getDingTitles(self, group, event, *args, **kwargs):
+
+        resultDingStrObj = {}
+
         ignore_regular = self.get_option('ignore_regular', group.project)
         highest_level_regular = self.get_option('highest_level_regular', group.project)
         medium_level_regular = self.get_option('medium_level_regular', group.project)
         low_level_regular = self.get_option('low_level_regular', group.project)
-        logging.warn('------分割sss-----')
-        logging.warn(ignore_regular)
-        logging.warn(highest_level_regular)
-        logging.warn(medium_level_regular)   
-        logging.warn(low_level_regular)
-        logging.warn('------分割ssss-----')
+        fix_project_name = self.get_option('fix_project_name', group.project)
+        fix_project_name = fix_project_name if bool(fix_project_name) else event.project.slug
+
+        # 错误信息分级判断
+        isIgnoreMessage = self.regularInMessage(ignore_regular, event.message)
+        isHighLevel = self.regularInMessage(highest_level_regular, event.message)
+        isMediumLevel = self.regularInMessage(medium_level_regular, event.message)
+        isLowLevel = self.regularInMessage(low_level_regular, event.message)
+
+        # 处理高危错误
+        if isHighLevel:      
+            resultDingStrObj["firstScreenTitle"] = "【高危错误!!请及时处理】来自"+ fix_project_name
+            resultDingStrObj["contentTitle"] = "**【高危】错误信息**来自"+fix_project_name
+            resultDingStrObj["isNeedAtAll"] = True
+            return resultDingStrObj
+
+        # 处理中危错误
+        if isMediumLevel:
+            resultDingStrObj["firstScreenTitle"] = "【中危错误!】来自"+ fix_project_name
+            resultDingStrObj["contentTitle"] = "**【中危】错误信息**来自"+fix_project_name
+            return resultDingStrObj
+
+        # 处理低级危错误
+        if isLowLevel:
+            resultDingStrObj["firstScreenTitle"] = "【低危错误】来自"+ fix_project_name
+            resultDingStrObj["contentTitle"] = "【低危】错误信息来自"+fix_project_name
+            return resultDingStrObj
+
+        # 处理忽略错误
+        if isIgnoreMessage:
+            print("匹配到了需要忽略的信息了")
+            return False    
+
+        resultDingStrObj["firstScreenTitle"] = "New error from"+ fix_project_name
+        resultDingStrObj["contentTitle"] = "New error from"+ fix_project_name
+        return resultDingStrObj
+
+    def regularInMessage (self, inputSrt, message):
+        if (bool(inputSrt)):
+            strArr = inputSrt.split("||") 
+            for item in strArr:
+                if item in message:
+                    return True
+        else:
+            return False    
 
 
 
