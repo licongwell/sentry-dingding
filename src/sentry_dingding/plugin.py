@@ -63,6 +63,7 @@ class DingDingPlugin(NotificationPlugin):
 
         resultDingStrObj = self.getDingTitles(group, event, *args, **kwargs)
 
+
         #title = u"**【高危】错误信息预警**来自 {}".format(event.project.slug)
 
         data = {
@@ -94,8 +95,8 @@ class DingDingPlugin(NotificationPlugin):
         fix_project_name = fix_project_name if bool(fix_project_name) else event.project.slug
 
         resultDingStrObj = {}
-        resultDingStrObj["firstScreenTitle"] = "New error from"+ fix_project_name
-        resultDingStrObj["contentTitle"] = "New error from"+ fix_project_name
+        resultDingStrObj["firstScreenTitle"] = "New error from {}".format(fix_project_name)
+        resultDingStrObj["contentTitle"] = "New error from {}".format(fix_project_name)
         resultDingStrObj["isNeedAtAll"] = False
 
         # 错误信息分级判断
@@ -106,21 +107,21 @@ class DingDingPlugin(NotificationPlugin):
 
         # 处理高危错误
         if isHighLevel:      
-            resultDingStrObj["firstScreenTitle"] = "【高危错误!!请及时处理】来自"+ fix_project_name
-            resultDingStrObj["contentTitle"] = "**【高危】错误信息**来自"+fix_project_name
+            resultDingStrObj["firstScreenTitle"] = u"【高危错误!!请及时处理】来自 {}".format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u"**【高危】错误信息**来自 {}".format(fix_project_name)
             resultDingStrObj["isNeedAtAll"] = True
             return resultDingStrObj
 
         # 处理中危错误
         if isMediumLevel:
-            resultDingStrObj["firstScreenTitle"] = "【中危错误!】来自"+ fix_project_name
-            resultDingStrObj["contentTitle"] = "**【中危】错误信息**来自"+fix_project_name
+            resultDingStrObj["firstScreenTitle"] = u"【中危错误!】来自 {}".format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u"**【中危】错误信息**来自 {}".format(fix_project_name)
             return resultDingStrObj
 
         # 处理低级危错误
         if isLowLevel:
-            resultDingStrObj["firstScreenTitle"] = "【低危错误】来自"+ fix_project_name
-            resultDingStrObj["contentTitle"] = "【低危】错误信息来自"+fix_project_name
+            resultDingStrObj["firstScreenTitle"] = u"【低危错误】来自 {}".format(fix_project_name)
+            resultDingStrObj["contentTitle"] = u"【低危】错误信息来自 {}".format(fix_project_name)
             return resultDingStrObj
 
         # 处理忽略错误
