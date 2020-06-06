@@ -52,13 +52,7 @@ class DingDingPlugin(NotificationPlugin):
             return
 
         access_token = self.get_option('access_token', group.project)
-
-        # ignore_regular = self.get_option('ignore_regular', group.project)
-        # highest_level_regular = self.get_option('highest_level_regular', group.project)
-        # medium_level_regular = self.get_option('medium_level_regular', group.project)
-        # low_level_regular = self.get_option('low_level_regular', group.project)
         
-
         send_url = DingTalk_API.format(token=access_token)
 
         resultDingStrObj = self.getDingTitles(group, event, *args, **kwargs)
@@ -103,6 +97,10 @@ class DingDingPlugin(NotificationPlugin):
         isMediumLevel = self.regularInMessage(medium_level_regular, event.message)
         isLowLevel = self.regularInMessage(low_level_regular, event.message)
 
+         # 优先处理忽略错误
+        if isIgnoreMessage:
+            return False  
+
         # 处理高危错误
         if isHighLevel:      
             resultDingStrObj["firstScreenTitle"] = u"【高危错误!!请及时处理】来自 {}".format(fix_project_name)
@@ -121,10 +119,6 @@ class DingDingPlugin(NotificationPlugin):
             resultDingStrObj["firstScreenTitle"] = u"【低危错误】来自 {}".format(fix_project_name)
             resultDingStrObj["contentTitle"] = u'<font color=#7B68EE size=4 face="黑体">【低危】错误信息预警</font> \n 项目名：{}'.format(fix_project_name)
             return resultDingStrObj
-
-        # 处理忽略错误
-        if isIgnoreMessage:
-            return False  
 
         return resultDingStrObj
 

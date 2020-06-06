@@ -10,7 +10,7 @@ class DingDingOptionsForm(forms.Form):
     )
     fix_project_name = forms.CharField(
         max_length=255,
-        help_text='fix your projectName on DingDing message',
+        help_text=u'中文测试',
         required = False
     )
     ignore_regular = forms.CharField(
