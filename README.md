@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-$ pip install sentry-dingding
+$ pip install git+https://github.com/licongwell/sentry-dingding.git
 ```
 
 ## 使用
