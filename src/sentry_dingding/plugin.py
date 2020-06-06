@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import json
-import logging
 
 import requests
 from sentry.plugins.bases.notify import NotificationPlugin
