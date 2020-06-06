@@ -10,7 +10,7 @@ class DingDingOptionsForm(forms.Form):
     )
     fix_project_name = forms.CharField(
         max_length=20,
-        help_text=u'在这可以自定义修正中文项目名字，钉钉上送错误信息将提示错误来自此项目明',
+        help_text=u'在这可以自定义修正中文项目名字，钉钉上送错误信息将提示错误来自此项目名。',
         required = False
     )
     ignore_regular = forms.CharField(
